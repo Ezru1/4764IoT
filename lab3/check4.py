@@ -40,7 +40,7 @@ def show(a, b, c, k, cnt, blink, ena):
     if not blink == 6 or enb:
         display.text(zeropad(Day), 72, 0, color) 
     display.text(DW[Week], 0, 20, color)
-    if enb:display.contrast(f(mx, adc.read()));print(adc.read())
+    # if enb:display.contrast(f(mx, adc.read()))
     display.show()
     return
 
@@ -84,7 +84,7 @@ def Minus_c(p):
 a = button(0,Select_a)
 b = button(14,Add_b)
 c = button(2,Minus_c)
-piezo = PWM(Pin(12, Pin.OUT), freq=Alerm_Frequency, duty=1024)
+piezo = PWM(Pin(15, Pin.OUT), freq=Alerm_Frequency, duty=1024)
 adc = ADC(0)
 rtc = RTC()
 rtc.datetime(Init_Time)  # set a specific date and time
@@ -94,7 +94,7 @@ i2c.writeto(0x3C, buf)  # write the given buffer to the peripheral
 display = ssd1306.SSD1306_I2C(128, 32, i2c)
 
 global delta, blink, ena
-delta, blink = 0, 0
+delta, blink, end = 0, 0, 0
 preirq = [-10, -10, -10]  # for [a,b,c]
 k = Blink_Interval_ms // (85.71)
 mx = 0  # adaptive
@@ -103,11 +103,7 @@ for i in range(1000):
 for cnt in range(10**9):
     t = time.ticks_ms()
     Year, Month, Day, Week, Hour, Min, Sec, Msec = rtc.datetime()
-    ena = (
-        1
-        if not blink and Hour == Hour_Set and Min == Minute_Set and Sec < Alarm_Time
-        else 0
-    )
+    ena = 1 if not blink and Hour == Hour_Set and Min == Minute_Set and Sec < Alarm_Time else 0
     if ena and not blink:
         piezo.duty(1024 if cnt // k % 2 else Alerm_Duty)
     if not ena:
