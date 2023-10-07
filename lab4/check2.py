@@ -55,18 +55,18 @@ def show(x,y):
     display.fill(0)
     display.text('test', x, y, 1)
     display.show()
-
 x,y = 0,0
 while 1:
     show(x,y)
     acx,acy,_ = get_data()
     Acx,Acy = abs(acx),abs(acy)
     if Acx > 8000:
-        dx = acx//1000 - 7
-        sign = 1 if acx > 0 else -1
-        x += sign * dx
+        dx = Acx//1000 - 7
+        sx = 1 if acx < 0 else -1
+        x += sx * dx
+        x %= 128
     if Acy > 8000:
-        dy = acy//1000 - 7
-        sign = 1 if acy > 0 else -1
-        y += sign * dy
-
+        dy = Acy//1000 - 7
+        sy = 1 if acy > 0 else -1
+        y += sy * dy
+        y %= 32
