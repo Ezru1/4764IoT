@@ -14,9 +14,9 @@ wlan = network.WLAN(network.STA_IF) # create station interface
 wlan.active(True)       # activate the interface
 wlan.scan()             # scan for access points
 wlan.isconnected()      # check if the station is connected to an AP
-ssid = 'SpectrumSetup-77'
-key = 'jollydesk715'
-wlan.connect(ssid, key) # connect to an AP
+ssid = 'Columbia University'
+
+wlan.connect(ssid) # connect to an AP
 wlan.config('mac')      # get the interface's MAC address
 wlan.ifconfig()         # get the interface's IP/netmask/gw/DNS addresses
 
@@ -28,7 +28,7 @@ def show(x,y,s):
     display.text(s, x, y, 1)
     display.show()
 
-url0 = 'http://ip-api.com/json/47.230.67.132'
+url0 = 'http://ip-api.com/json'
 r = urequests.get(url0)
 r = r.json()
 latitude = r['lat']
@@ -52,4 +52,4 @@ while 1:
         show(50,0,str(longtitude)[:-2])
         show(0,10,Weather_type)
         show(0,20,str(Weather_temp))
-        urequests.post("http://ntfy.sh/Zzz",data="Backup successful")
+        urequests.post("http://ntfy.sh/Zzz",data="Latitude:%s Longtitude:%s\nWeather:%s Temperature:%s"%(latitude,longtitude,Weather_type,Weather_temp))
