@@ -65,10 +65,12 @@ while True:
         rec = conn.recv(4096)
         rec = rec.split(b'\r\n\r\n')
         rec = str(rec[0])
-        print(rec[2:-1])
+        rec = rec[2:-1]
         if 'on' in rec:show()
-        if 'off' in rec:
+        elif 'off' in rec:
             display.fill(0)
             display.show()
-        if 'time' in rec:showtime()
+        elif 'time' in rec:showtime()
+        else:
+            display.text(rec, 44, 10, 1)
     time.sleep(0.01)
