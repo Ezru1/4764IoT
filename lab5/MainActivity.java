@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity{
             public void run() {
                 try {
                     // 服务器的IP地址和端口
-                    String serverAddress = "6.tcp.ngrok.io";
-                    int serverPort = 14961;
+                    String serverAddress = "8.tcp.ngrok.io";
+                    int serverPort = 11136;
 
                     // 创建Socket连接
                     Socket socket = new Socket(serverAddress, serverPort);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity{
             String s = matches.get(0).toString();
             speachText.setText(s);
             try {
-                Socket socket = new Socket("6.tcp.ngrok.io",14961);
+                Socket socket = new Socket("8.tcp.ngrok.io",11136);
                 OutputStream op = socket.getOutputStream();
                 PrintWriter pw = new PrintWriter((op));
                 pw.write(s);
