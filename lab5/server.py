@@ -73,4 +73,5 @@ while True:
         elif 'time' in rec:showtime()
         else:
             display.text(rec, 44, 10, 1)
+            display.show()
     time.sleep(0.01)
