@@ -66,12 +66,14 @@ while True:
         rec = rec.split(b'\r\n\r\n')
         rec = str(rec[0])
         rec = rec[2:-1]
+        print(rec)
         if 'on' in rec:show()
         elif 'off' in rec:
             display.fill(0)
             display.show()
         elif 'time' in rec:showtime()
         else:
+            display.fill(0)
             display.text(rec, 44, 10, 1)
             display.show()
     time.sleep(0.01)
